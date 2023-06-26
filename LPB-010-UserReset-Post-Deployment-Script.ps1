@@ -17,7 +17,7 @@ $roleName = "Password Administrator"
 $SentinelRoleName = "Microsoft Sentinel Responder"
 $PermissionName = "User.ReadWrite.All" 
 
-$GraphServicePrincipal = Get-AzADServicePrincipal -Filter "appId eq '$GraphAppId'"
+$GraphServicePrincipal = Get-AzAdServicePrincipal -ApplicationId "00000003-0000-0000-c000-000000000000"
 
 #Grant Azure AD Password Administrator role
 $role = Get-AzureADDirectoryRole | ? { $_.displayName -eq $roleName }
