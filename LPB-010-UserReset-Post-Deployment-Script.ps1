@@ -3,7 +3,7 @@
     [parameter(Mandatory = $true)][string]$SubscriptionId, # Subscription ID
     [parameter(Mandatory = $true)][string]$ResourceGroupName # Resource Group Name
 )
-
+Install-Module AzureAD -Force
 $context = Get-AzContext
 
 if (!$context) {
@@ -12,7 +12,6 @@ if (!$context) {
 }
 
 $MI = Get-AzADServicePrincipal -ObjectId $MIGuid
-$GraphAppId = "00000003-0000-0000-c000-000000000000"
 $roleName = "Password Administrator"
 $SentinelRoleName = "Microsoft Sentinel Responder"
 $PermissionName = "User.ReadWrite.All" 
