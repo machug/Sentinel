@@ -1,6 +1,8 @@
-﻿$MIGuid = "<GUID>"
-$SubscriptionId = "<SUBID>"
-$ResourceGroupName = "<RG>"
+﻿param (
+    [parameter(Mandatory = $true)][string]$MIGuid, # Managed Identity GUID
+    [parameter(Mandatory = $true)][string]$SubscriptionId, # Subscription ID
+    [parameter(Mandatory = $true)][string]$ResourceGroupName # Resource Group Name
+)
 
 Connect-AzureAD
 
@@ -13,11 +15,11 @@ $PermissionName = "User.ReadWrite.All"
 $GraphServicePrincipal = Get-AzureADServicePrincipal -Filter "appId eq '$GraphAppId'"
 
 #Grant Azure AD Password Administrator role
-$role = Get-AzureADDirectoryRole | Where {$_.displayName -eq $roleName}
+$role = Get-AzureADDirectoryRole | Where { $_.displayName -eq $roleName }
 if ($role -eq $null) {
-$roleTemplate = Get-AzureADDirectoryRoleTemplate | Where {$_.displayName -eq $roleName}
-Enable-AzureADDirectoryRole -RoleTemplateId $roleTemplate.ObjectId
-$role = Get-AzureADDirectoryRole | Where {$_.displayName -eq $roleName}
+    $roleTemplate = Get-AzureADDirectoryRoleTemplate | Where { $_.displayName -eq $roleName }
+    Enable-AzureADDirectoryRole -RoleTemplateId $roleTemplate.ObjectId
+    $role = Get-AzureADDirectoryRole | Where { $_.displayName -eq $roleName }
 }
 Add-AzureADDirectoryRoleMember -ObjectId $role.ObjectId -RefObjectId $MI.ObjectID
 
@@ -25,6 +27,6 @@ Add-AzureADDirectoryRoleMember -ObjectId $role.ObjectId -RefObjectId $MI.ObjectI
 New-AzRoleAssignment -ObjectId $MIGuid -RoleDefinitionName $SentinelRoleName -Scope /subscriptions/$SubscriptionId/resourcegroups/$ResourceGroupName
 
 #Grant Azure AD Permissions
-$AppRole = $GraphServicePrincipal.AppRoles | Where-Object {$_.Value -eq $PermissionName -and $_.AllowedMemberTypes -contains "Application"}
+$AppRole = $GraphServicePrincipal.AppRoles | Where-Object { $_.Value -eq $PermissionName -and $_.AllowedMemberTypes -contains "Application" }
 New-AzureAdServiceAppRoleAssignment -ObjectId $MI.ObjectId -PrincipalId $MI.ObjectId `
--ResourceId $GraphServicePrincipal.ObjectId -Id $AppRole.Id
+    -ResourceId $GraphServicePrincipal.ObjectId -Id $AppRole.Id
