@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory = $true)][string]$Region,
     [Parameter(Mandatory = $false)][string[]]$Solutions,
     [Parameter(Mandatory = $false)][string[]]$SeveritiesToInclude = @("Informational", "Low", "Medium", "High"),
-    [Parameter(Mandatory = $true)][bool]$enableAnalytics
+    [Parameter(Mandatory = $false)][bool]$enableAnalytics = $false
 )
 
 $context = Get-AzContext
