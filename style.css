@@ -1,0 +1,58 @@
+table {
+    border: 1px solid #b3adad;
+    border-collapse: collapse;
+    padding: 10px;
+    width: 100%;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+table th {
+    border: 1px solid #b3adad;
+    padding: 10px;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+table td {
+    border: 1px solid #b3adad;
+    text-align: center;
+    padding: 10px;
+    background: #ffffff;
+    color: #313030;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+.report-title {
+    color: rgb(255, 20, 20);
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.td-left-top {
+    width: 33%;
+    text-align: left;
+    vertical-align: top;
+}
+
+.td-left-top-width-100 {
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+}
+
+.list {
+    list-style-position: outside;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    color: #313030;
+    text-align: left;
+    padding: 10px;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
